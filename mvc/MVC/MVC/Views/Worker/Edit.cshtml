@@ -1,0 +1,35 @@
+@model Worker
+@{
+    ViewData["Title"] = "Редактировать работника";
+}
+<div>
+    <h1>@ViewData["Title"]</h1>
+    <div>
+        <form asp-controller="Worker" asp-action="Edit" method="post">
+            <input type="hidden" asp-for="id"/>
+            <div asp-validation-summary="All"></div>
+
+            <div class="div-box">
+                <label asp-for="name"></label>
+                <input asp-for="name"/>
+                <span asp-validation-for="name"></span>
+            </div>
+            <div class="div-box">
+                <label asp-for="lastName"></label>
+                <input asp-for="lastName"/>
+                <span asp-validation-for="lastName"></span>
+            </div>
+            <div class="div-box">
+                <label asp-for="patronymic"></label>
+                <input asp-for="patronymic"/>
+                <span asp-validation-for="patronymic"></span>
+            </div>
+            <div class="div-box">
+                <label asp-for="email"></label>
+                <input asp-for="email"/>
+                <span asp-validation-for="email"></span>
+            </div>
+            <button type="submit">Сохранить</button>
+        </form>
+    </div>
+</div>

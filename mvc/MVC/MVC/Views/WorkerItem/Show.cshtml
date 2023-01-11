@@ -1,0 +1,25 @@
+@model Worker
+@{
+}
+
+<div>
+    <h2>
+        name - @Model.name
+    </h2>
+    <h2>
+        last name - @Model.lastName
+    </h2>
+    <h2>
+        patronymic - @Model.patronymic
+    </h2>
+    <h2>
+        email - @Model.email
+    </h2>
+    <h2>Projects</h2>
+    <ul>
+        @foreach (var project in ViewBag.projects)
+        {
+            <li>@project.name</li>
+        }
+    </ul>
+</div>

@@ -1,0 +1,30 @@
+﻿@model IQueryable<Worker>
+@{
+    ViewData["Title"] = "Show workers";
+}
+<div>
+    <h1>@ViewData["Title"]</h1>
+    <div class="div-box">
+        <a asp-controller="Worker" asp-action="Edit">Добавить работника</a>
+    </div>
+    @if (Model.Any())
+    {
+        <div>
+            @foreach (var entity in Model)
+            {
+                <div>
+                    <a asp-controller="Worker" asp-action="Edit" asp-route-id="@entity.id">редактировать</a>
+                    |
+                    <form style="display: inline-block;" id="form-@entity.id" asp-controller="Worker" asp-action="Delete" method="post">
+                        <input type="hidden" name="id" value="@entity.id">
+                        <a href="#" onclick="document.getElementById('form-@entity.id').submit();">удалить</a>
+                    </form>
+                    |
+                    <a asp-controller="WorkerItem" asp-action="Index" asp-route-id="@entity.id">
+                        @($"{entity.name} ${entity.lastName}")
+                    </a>
+                </div>
+            }
+        </div>
+    }
+</div>

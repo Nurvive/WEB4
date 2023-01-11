@@ -1,0 +1,64 @@
+@model IndexViewModel
+@{
+    ViewData["Title"] = "Show projects";
+}
+<div>
+    <h1>@ViewData["Title"]</h1>
+    <div class="div-box">
+        <a asp-controller="Project" asp-action="Edit">Добавить проект</a>
+    </div>
+    <form method="get">
+        <div class="form-inline">
+            <label>Имя: </label>
+            <input name="name" value="@Model.FilterViewModel.SelectedName" class="form-control"/>
+
+            <label>Приоритет: </label>
+            <input name="priority" type="number" min="1" value="@Model.FilterViewModel.SelectedPriority" class="form-control"/>
+
+            <input type="submit" value="Фильтр" class="btn btn-outline-dark"/>
+        </div>
+    </form>
+    <table class="table">
+        <thead>Сортировка</thead>
+        <tr>
+            <th>
+                <a
+                    asp-action="ShowProjects" 
+                    asp-route-sortOrder="@(Model.SortViewModel.NameSort)"
+                    asp-route-name="@(Model.FilterViewModel.SelectedName)"
+                    asp-route-priority="@(Model.FilterViewModel.SelectedPriority)">
+                    Имя
+                </a>
+            </th>
+            <th>
+                <a
+                    asp-action="ShowProjects"
+                    asp-route-sortOrder="@(Model.SortViewModel.PrioritySort)"
+                    asp-route-name="@(Model.FilterViewModel.SelectedName)"
+                    asp-route-priority="@(Model.FilterViewModel.SelectedPriority)">
+                    Приоритет
+                </a>
+            </th>
+        </tr>
+    </table>
+    @if (Model.Projects.Any())
+    {
+        <div>
+            @foreach (var entity in Model.Projects)
+            {
+                <div>
+                    <a asp-controller="Project" asp-action="Edit" asp-route-id="@entity.id">редактировать</a>
+                    |
+                    <form style="display: inline-block;" id="form-@entity.id" asp-controller="Project" asp-action="Delete" method="post">
+                        <input type="hidden" name="id" value="@entity.id">
+                        <a href="#" onclick="document.getElementById('form-@entity.id').submit();">удалить</a>
+                    </form>
+                    |
+                    <a asp-controller="ProjectItem" asp-action="Index" asp-route-id="@entity.id">
+                        @($"{entity.name}")
+                    </a>
+                </div>
+            }
+        </div>
+    }
+</div>

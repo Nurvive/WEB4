@@ -1,0 +1,34 @@
+@model Project
+@{
+}
+
+<div>
+    <h2>
+        name - @Model.name
+    </h2>
+    <h2>
+        executor - @Model.executor
+    </h2>
+    <h2>
+        customer - @Model.customer
+    </h2>
+    <h2>
+        director - @Model.director.name
+    </h2>
+    <h2>
+        start - @Model.start
+    </h2>
+    <h2>
+        end - @Model.end
+    </h2>
+    <h2>
+        priority - @Model.priority
+    </h2>
+    <h2>Workers</h2>
+    <ul>
+        @foreach (var worker in ViewBag.workers)
+        {
+            <li>@worker.name</li>
+        }
+    </ul>
+</div>

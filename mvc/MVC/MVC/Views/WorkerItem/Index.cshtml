@@ -1,0 +1,21 @@
+@model IQueryable<Worker>
+@{
+}
+
+<div>
+    @if (Model.Any())
+    {
+        <ul>
+            @foreach (var entity in Model)
+            {
+                <li>
+                    <a asp-area="" asp-controller="WorkerItem" asp-action="Index" asp-route-id="@entity.id">
+                        Link
+                    </a>
+                    <h4>@entity.name</h4>
+                    <p>@entity.lastName</p>
+                </li>
+            }
+        </ul>
+    }
+</div>
